@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>haii semua</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: #add8e6; /* Light blue background */
+        }
+        h1 {
+            color: rgb(32, 115, 134); /* blue title */
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+        }
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>khusus 4 brother</h1>
+        <label for="text">Masukkan Teks:</label>
+        <input type="text" id="text" placeholder="tulis disini teks nya njir">
+
+        <label for="shift">ubah teks:</label>
+        <select id="shift">
+            <option value="1">mengubah</option>
+            <option value="25">perbaiki teks</option>
+        </select>
+
+        <button onclick="encrypt()">selesai</button>
+
+        <h3>hasil:</h3>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        function caesarCipher(text, shift) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const isLowerCase = (char) => char === char.toLowerCase();
+
+            return text.split('').map(char => {
+                const isLetter = alphabet.includes(char.toUpperCase());
+                if (!isLetter) return char;
+
+                const index = alphabet.indexOf(char.toUpperCase());
+                const newIndex = (index + shift + 26) % 26;
+                const shiftedChar = alphabet[newIndex];
+
+                return isLowerCase(char) ? shiftedChar.toLowerCase() : shiftedChar;
+            }).join('');
+        }
+
+        function encrypt() {
+            const text = document.getElementById('text').value;
+            const shift = parseInt(document.getElementById('shift').value);
+            const output = caesarCipher(text, shift);
+            document.getElementById('output').textContent = output;
+        }
+    </script>
+</body>
+</html>
